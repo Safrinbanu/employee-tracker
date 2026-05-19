@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register – YourCompany</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --blue: #1a56db; --blue-dark: #1447b0; --text: #1e2d40; --muted: #6b7a90; --border: #dce3ee; --bg: #f0f4fb; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+  .login-wrapper { display: flex; width: 900px; max-width: 98vw; min-height: 520px; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(26,86,219,0.15); }
+  .login-left { flex: 1; background: linear-gradient(140deg, #1a3c6e 0%, #1a56db 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 40px; color: white; position: relative; overflow: hidden; }
+  .login-left::before { content: ''; position: absolute; width: 260px; height: 260px; border-radius: 50%; background: rgba(255,255,255,0.07); top: -60px; right: -60px; }
+  .login-left::after { content: ''; position: absolute; width: 180px; height: 180px; border-radius: 50%; background: rgba(255,255,255,0.06); bottom: -40px; left: -40px; }
+  .brand-icon { font-size: 56px; margin-bottom: 16px; }
+  .brand-name { font-size: 28px; font-weight: 800; }
+  .brand-tagline { font-size: 14px; opacity: 0.75; margin-top: 8px; text-align: center; }
+  .login-right { flex: 1; background: white; padding: 44px; display: flex; flex-direction: column; justify-content: center; }
+  .login-right h2 { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .login-right p { color: var(--muted); font-size: 14px; margin-bottom: 28px; }
+  label { font-size: 13px; font-weight: 700; color: var(--text); display: block; margin-bottom: 6px; }
+  .input-wrap { position: relative; margin-bottom: 18px; }
+  .input-wrap i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); font-size: 16px; }
+  .input-wrap input { width: 100%; padding: 12px 14px 12px 42px; border: 1.5px solid var(--border); border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 14px; color: var(--text); outline: none; transition: border-color 0.2s; background: #fafbff; }
+  .input-wrap input:focus { border-color: var(--blue); background: white; }
+  .btn-success { width: 100%; padding: 13px; background: linear-gradient(135deg, #16a34a, #15803d); color: white; border: none; border-radius: 10px; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity 0.2s; margin-top: 4px; }
+  .btn-success:hover { opacity: 0.92; }
+  .alt-link { text-align: center; margin-top: 18px; font-size: 13px; color: var(--muted); }
+  .alt-link a { color: var(--blue); font-weight: 700; text-decoration: none; }
+  @media(max-width:640px) { .login-left { display: none; } }
+</style>
+</head>
+<body>
+<div class="login-wrapper">
+  <div class="login-left">
+    <div class="brand-icon"><i class="bi bi-building-fill"></i></div>
+    <div class="brand-name">YourCompany</div>
+    <div class="brand-tagline">Join the Employee Portal</div>
+  </div>
+  <div class="login-right">
+    <h2>Create Account</h2>
+    <p>Register to get started with your employee portal</p>
+    <form method="POST">
+      <label>Full Name</label>
+      <div class="input-wrap">
+        <i class="bi bi-person-fill"></i>
+        <input type="text" name="name" placeholder="Enter your full name" required>
+      </div>
+      <label>Email Address</label>
+      <div class="input-wrap">
+        <i class="bi bi-envelope-fill"></i>
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <label>Password</label>
+      <div class="input-wrap">
+        <i class="bi bi-lock-fill"></i>
+        <input type="password" name="password" placeholder="Create a password" required>
+      </div>
+      <button type="submit" class="btn-success">Register</button>
+    </form>
+    <div class="alt-link">Already have an account? <a href="/">Sign In</a></div>
+  </div>
+</div>
+</body>
+</html>

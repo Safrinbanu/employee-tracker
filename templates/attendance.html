@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Attendance – BRAVYNEX</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --blue: #1a56db; --sidebar: #1a3c6e; --text: #1e2d40; --muted: #6b7a90; --border: #dce3ee; --success: #16a34a; --danger: #dc2626; --warning: #d97706; --bg: #f0f4fb; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); display: flex; min-height: 100vh; }
+  .sidebar { width: 240px; background: var(--sidebar); color: white; display: flex; flex-direction: column; min-height: 100vh; flex-shrink: 0; }
+  .sidebar-brand { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .brand-logo { width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px; }
+  .brand-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+  .brand-sub { font-size: 10px; opacity: 0.6; margin-top: 4px; letter-spacing: 1px; }
+  .sidebar-nav { padding: 20px 12px; flex: 1; }
+  .nav-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; opacity: 0.5; text-transform: uppercase; padding: 0 12px; margin-bottom: 8px; margin-top: 16px; }
+  .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.75); font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; margin-bottom: 2px; }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.12); color: white; }
+  .nav-item i { font-size: 17px; }
+  .sidebar-bottom { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .nav-item.logout { color: rgba(255,120,120,0.85); }
+  .nav-item.logout:hover { background: rgba(220,38,38,0.15); color: #fca5a5; }
+  .main { flex: 1; display: flex; flex-direction: column; }
+  .topbar { background: white; border-bottom: 1px solid var(--border); padding: 16px 28px; }
+  .topbar h1 { font-size: 20px; font-weight: 800; color: var(--text); }
+  .topbar p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .content { padding: 28px; flex: 1; }
+  .card { background: white; border-radius: 14px; padding: 28px; box-shadow: 0 2px 12px rgba(26,60,110,0.06); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .card-title { font-size: 17px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  .btn-back { padding: 9px 20px; background: #f1f5f9; color: var(--muted); border: none; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .btn-back:hover { background: var(--border); }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: var(--sidebar); color: white; padding: 13px 16px; text-align: left; font-size: 13px; font-weight: 700; }
+  thead th:first-child { border-radius: 8px 0 0 8px; }
+  thead th:last-child { border-radius: 0 8px 8px 0; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:hover { background: #f8faff; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 14px 16px; font-size: 14px; color: var(--text); }
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+  .badge-present { background: #dcfce7; color: #16a34a; }
+  .badge-halfday { background: #fef3c7; color: #92400e; }
+  .badge-absent { background: #fee2e2; color: #b91c1c; }
+  .text-danger { color: var(--danger); font-weight: 600; font-size: 13px; }
+  .empty-state { text-align: center; padding: 48px; color: var(--muted); }
+  .empty-state i { font-size: 48px; opacity: 0.3; margin-bottom: 12px; display: block; }
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <img class="brand-logo" src="{{ url_for('static', filename='images/logo-BoBB0p34.png') }}" alt="Bravynex">
+    <div class="brand-name">BRAVYNEX</div>
+    <div class="brand-sub">ENGINEERING · EMPLOYEE PORTAL</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-label">Main</div>
+    <a href="/dashboard" class="nav-item"><i class="bi bi-grid-fill"></i> Dashboard</a>
+    <div class="nav-label">Attendance</div>
+    <a href="/attendance" class="nav-item active"><i class="bi bi-calendar-check-fill"></i> My Attendance</a>
+    <div class="nav-label">Updates</div>
+    <a href="/add-update" class="nav-item"><i class="bi bi-plus-circle-fill"></i> Add Daily Update</a>
+    <a href="/updates" class="nav-item"><i class="bi bi-journal-text"></i> View Updates</a>
+    <div class="nav-label">Admin</div>
+    <a href="/admin" class="nav-item"><i class="bi bi-shield-lock-fill"></i> Admin Login</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="/logout" class="nav-item logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <h1>My Attendance</h1>
+    <p>Track your attendance history</p>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><i class="bi bi-calendar-check-fill" style="color:var(--blue)"></i> Attendance History</div>
+        <a href="/dashboard" class="btn-back"><i class="bi bi-arrow-left"></i> Back to Dashboard</a>
+      </div>
+      <table>
+        <thead><tr><th>Date</th><th>Check In</th><th>Check Out</th><th>Hours Worked</th><th>Status</th></tr></thead>
+        <tbody>
+          {% for a in attendance %}
+          <tr>
+            <td><strong>{{ a.date }}</strong></td>
+            <td>{{ a.check_in }}</td>
+            <td>{% if a.check_out != '--:--' %}{{ a.check_out }}{% else %}<span class="text-danger"><i class="bi bi-clock"></i> Not Checked Out</span>{% endif %}</td>
+            <td><strong>{{ a.hours }}</strong></td>
+            <td>
+              {% if a.status == 'Present' %}<span class="badge badge-present"><i class="bi bi-check-circle-fill"></i> Present</span>
+              {% elif a.status == 'Half Day' %}<span class="badge badge-halfday"><i class="bi bi-circle-half"></i> Half Day</span>
+              {% else %}<span class="badge badge-absent"><i class="bi bi-x-circle-fill"></i> Absent</span>{% endif %}
+            </td>
+          </tr>
+          {% else %}
+          <tr><td colspan="5"><div class="empty-state"><i class="bi bi-calendar-x"></i>No attendance records found</div></td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>

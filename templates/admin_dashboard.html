@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard – BRAVYNEX</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --blue: #1a56db; --sidebar: #111827; --text: #1e2d40; --muted: #6b7a90; --border: #dce3ee; --bg: #f0f4fb; }
+  body { font-family: 'Nunito', sans-serif; background: var(--bg); display: flex; min-height: 100vh; }
+  .sidebar { width: 250px; background: var(--sidebar); color: white; display: flex; flex-direction: column; min-height: 100vh; flex-shrink: 0; }
+  .sidebar-brand { padding: 28px 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .brand-logo { width: 64px; height: 64px; object-fit: contain; margin-bottom: 10px; }
+  .brand-name { font-size: 20px; font-weight: 800; letter-spacing: 1px; }
+  .brand-sub { font-size: 10px; opacity: 0.6; margin-top: 4px; letter-spacing: 1px; }
+  .admin-tag { display: inline-block; background: rgba(239,68,68,0.15); color: #f87171; border-radius: 20px; padding: 3px 10px; font-size: 10px; font-weight: 700; letter-spacing: 0.5px; margin-top: 8px; }
+  .sidebar-nav { padding: 20px 12px; flex: 1; }
+  .nav-label { font-size: 10px; font-weight: 700; letter-spacing: 1px; opacity: 0.4; text-transform: uppercase; padding: 0 12px; margin-bottom: 8px; margin-top: 16px; }
+  .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; color: rgba(255,255,255,0.65); font-size: 14px; font-weight: 600; text-decoration: none; transition: background 0.2s; margin-bottom: 2px; }
+  .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.1); color: white; }
+  .nav-item i { font-size: 17px; }
+  .sidebar-bottom { padding: 16px 12px; border-top: 1px solid rgba(255,255,255,0.08); }
+  .nav-item.logout { color: rgba(255,120,120,0.85); }
+  .nav-item.logout:hover { background: rgba(220,38,38,0.15); color: #fca5a5; }
+  .main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .topbar { background: white; border-bottom: 1px solid var(--border); padding: 16px 28px; display: flex; align-items: center; justify-content: space-between; }
+  .topbar h1 { font-size: 20px; font-weight: 800; color: var(--text); }
+  .topbar p { font-size: 13px; color: var(--muted); margin-top: 2px; }
+  .btn-att { padding: 9px 18px; background: var(--blue); color: white; border: none; border-radius: 8px; font-family: 'Nunito', sans-serif; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .content { padding: 28px; flex: 1; }
+  .card { background: white; border-radius: 14px; padding: 28px; box-shadow: 0 2px 12px rgba(26,60,110,0.06); }
+  .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+  .card-title { font-size: 17px; font-weight: 800; color: var(--text); display: flex; align-items: center; gap: 8px; }
+  table { width: 100%; border-collapse: collapse; }
+  thead th { background: var(--sidebar); color: white; padding: 13px 16px; text-align: left; font-size: 13px; font-weight: 700; }
+  thead th:first-child { border-radius: 8px 0 0 8px; }
+  thead th:last-child { border-radius: 0 8px 8px 0; }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s; }
+  tbody tr:hover { background: #f8faff; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody td { padding: 14px 16px; font-size: 14px; color: var(--text); vertical-align: top; }
+  .emp-name { font-weight: 700; }
+  .date-cell { white-space: nowrap; color: var(--muted); font-size: 13px; }
+  .update-text { line-height: 1.6; max-width: 480px; }
+  .empty-row td { text-align: center; padding: 48px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <img class="brand-logo" src="{{ url_for('static', filename='images/logo-BoBB0p34.png') }}" alt="Bravynex">
+    <div class="brand-name">BRAVYNEX</div>
+    <div class="brand-sub">ENGINEERING · ADMIN PANEL</div>
+    <div class="admin-tag">ADMIN</div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-label">Overview</div>
+    <a href="/admin-dashboard" class="nav-item active"><i class="bi bi-grid-fill"></i> Dashboard</a>
+    <div class="nav-label">Reports</div>
+    <a href="/admin-attendance" class="nav-item"><i class="bi bi-calendar-check-fill"></i> Attendance Report</a>
+    <div class="nav-label">Employees</div>
+    <a href="/admin/add-employee" class="nav-item"><i class="bi bi-person-plus-fill"></i> Add Employee</a>
+  </nav>
+  <div class="sidebar-bottom">
+    <a href="/admin-logout" class="nav-item logout"><i class="bi bi-box-arrow-right"></i> Logout</a>
+  </div>
+</div>
+<div class="main">
+  <div class="topbar">
+    <div>
+      <h1>Admin Dashboard</h1>
+      <p>All employee work updates</p>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <a href="/admin-attendance" class="btn-att"><i class="bi bi-calendar-check"></i> Attendance Report</a>
+      <a href="/admin/add-employee" class="btn-att" style="background:#16a34a;"><i class="bi bi-person-plus-fill"></i> Add Employee</a>
+    </div>
+  </div>
+  <div class="content">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title"><i class="bi bi-journal-text" style="color:var(--blue)"></i> Employee Work Updates</div>
+      </div>
+      <table>
+        <thead><tr><th>Employee</th><th>Work Update</th><th>Date</th></tr></thead>
+        <tbody>
+          {% for update in updates %}
+          <tr>
+            <td><span class="emp-name">{{ update.employee_name }}</span></td>
+            <td class="update-text">{{ update.work_update }}</td>
+            <td class="date-cell">{{ update.date.strftime('%d-%m-%Y') }}<br>{{ update.date.strftime('%H:%M') }}</td>
+          </tr>
+          {% else %}
+          <tr class="empty-row"><td colspan="3"><i class="bi bi-inbox" style="font-size:40px;opacity:0.2;display:block;margin-bottom:8px"></i>No updates found</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
